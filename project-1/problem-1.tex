@@ -1,0 +1,53 @@
+\documentclass[00-main.tex]{subfiles}
+\begin{document}
+
+\section*{Problem One}
+
+\subsection*{a.}
+
+\begin{minted}{matlab}
+>> A = [2 1 0;1 4 3;2 4.5 6];
+>> b = [2 0 -3.5]';
+>> x = A\b
+x =
+   0.50000
+   1.00000
+  -1.50000
+>> % Checking the answer:
+>> A*x
+ans =
+   2.00000
+   0.00000
+  -3.50000
+>> % Answer is b, as expected.
+\end{minted}
+
+\subsection*{b.}
+
+\begin{minted}{matlab}
+>> % Finding the LU-decomposition of A where L is the
+>> % lower- and U is the upper triangular matrix.
+>> [L U] = lu(A);
+>> L
+L =
+   1.00000   0.00000   0.00000
+   0.50000   1.00000   0.00000
+   1.00000   1.00000   1.00000
+>> U
+U =
+   2.00000   1.00000   0.00000
+   0.00000   3.50000   3.00000
+   0.00000   0.00000   3.00000
+\end{minted}
+
+\subsection*{c.}
+
+\inputminted[linenos]{matlab_c}{newton.m}
+
+\subsection{d.}
+
+\inputminted[linenos]{matlab_d}{newton.m}
+
+
+%\bibliosub
+\end{document}

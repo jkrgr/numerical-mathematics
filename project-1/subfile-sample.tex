@@ -1,0 +1,53 @@
+\documentclass[00-00-main.tex]{subfiles}
+\begin{document}
+
+\section{Problem One}
+T. Mitchell defines a well posed learning problem as
+\begin{listing}
+\textit{A computer program is said to learn from experience E with respect to some
+class of tasks T and performance measure P, if its performance at tasks in T,
+as measured by P, improve by experience E.}
+\end{listing}
+In mathematics a well posed problem is one that has a (unique) solution, and where a
+small change in the problem's initial condition(s) hardly affects the solution.
+
+\subsection{Pregnant customers}
+A large food chain would like to predict whether a customer is pregnant or not, based
+solely on the products that is bought. Using the definition above, we can describe this
+as a well posed learning problem.
+
+\item Hello
+\item You
+
+
+
+\section{Coding}
+
+\begin{lstlisting}
+def foo(bar):
+    print 'Eat my ' + bar
+\end{lstlisting}
+
+% listing makes a floating box with top and bottom borders
+\begin{listing}
+% minted for syntax highlighting
+\begin{minted}[linenos]{python} 
+def foo(bar='Chocolate'):
+    rage = 'Did you eat my ' + bar + '?!'
+    print rage
+\end{minted}
+\end{listing}
+Remember to \mint{python} |import gravity|
+
+\section{Citing}
+This is a citation\cite{kiss-2010-I}. And you can use the citation verbally as well, according to \citet{kiss-2010-I}.
+
+\section{Mathemagic}
+An inline equation is written $x^3 = 8$. You can also use this
+\begin{equation}
+\label{eq:1337-equation}
+x^5+4x^2=1337x
+\end{equation}
+to write a 1337 equation.
+\bibliosub
+\end{document}
