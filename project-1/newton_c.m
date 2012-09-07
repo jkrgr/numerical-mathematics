@@ -1,4 +1,5 @@
-% Solving a fifth degree equation using octave/matlab
+% Solving a fifth degree equation in octave/matlab
+% using four iterations of Newton's method.
 f = @(x) x^5 + x + 1;
 df= @(x) 5*x^4 + 1;
 x = 0;

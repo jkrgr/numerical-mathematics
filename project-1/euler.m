@@ -22,7 +22,7 @@ while t < tend
     
     % The Euler step
     %y = y + h * feval(f, t, y);
-    y = y + h*f(t,y)
+    y = y + h*f(t,y);
     t = t + h;
     
     % Store the solution

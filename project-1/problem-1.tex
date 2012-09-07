@@ -42,11 +42,24 @@ U =
 
 \subsection*{c.}
 
-\inputminted[linenos]{matlab_c}{newton.m}
+\inputminted[linenos]{matlab}{newton_c.m}
 
-\subsection{d.}
+\subsection*{d.}
 
-\inputminted[linenos]{matlab_d}{newton.m}
+\inputminted[linenos]{matlab}{newton_d.m}
+
+\subsection*{e.}
+
+\begin{minted}{matlab}
+>> [t_1 y_1] = euler(@(t,y) -sin(y), 0, 10, 1.5, 0.1);
+>> [t_2 y_2] = euler(@(t,y) y_1(floor(10*t+1)), 0, 10, 0, 0.1);
+>> plot(t_1, y_1, t_2, y_2);
+\end{minted}
+
+\begin{figure}
+\includegraphics[width=\textwidth]{euler_plot}
+\caption{Plot shows $y_1$ and $y_2$ that was found through Euler's method.}
+\end{figure}
 
 
 %\bibliosub
