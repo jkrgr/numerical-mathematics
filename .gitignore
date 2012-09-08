@@ -1,3 +1,6 @@
+octave-core
+*.bbl
+*.blg
 *.*~
 *~
 *.synctex.gz

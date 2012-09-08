@@ -49,11 +49,14 @@ U =
 \inputminted[linenos]{matlab}{newton_d.m}
 
 \subsection*{e.}
+The system of the two coupled first order ODEs and can be represented as a column vector of state derivatives, $ {d \overrightarrow{y} \over dt} = [{dy_1 \over dt}, {dy_2 \over dt}]^T $. 
+An (anonymous) function that returns such a column vector is passed to $euler$, and the ODEs are then solved simultaneously.
 
 \begin{minted}{matlab}
->> [t_1 y_1] = euler(@(t,y) -sin(y), 0, 10, 1.5, 0.1);
->> [t_2 y_2] = euler(@(t,y) y_1(floor(10*t+1)), 0, 10, 0, 0.1);
->> plot(t_1, y_1, t_2, y_2);
+>> [t y] = euler(@(t,y) [-sin(y(2));y(1)], 0, 10, [1.5;0], 0.1);
+>> plot(t, y(1,:), t, y(2,:));
+>> xlabel('t');
+>> legend('y_1', 'y_2');
 \end{minted}
 
 \begin{figure}
