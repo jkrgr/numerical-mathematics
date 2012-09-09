@@ -1,0 +1,46 @@
+\documentclass[00-main.tex]{subfiles}
+\begin{document}
+
+\section*{Problem Three}
+
+\subsection*{a.}
+Let $\mathbf{v} \neq 0$. Each row of $\mathbf{uv}^T$ is a multiple of $\mathbf{v}^T$ so the row space of $\mathbf{uv}^T$ has dimension 1. This implies that the rank of the matrix is 1.
+
+\subsection*{b.}
+
+\begin{align}
+\nonumber
+I = AA^{-1} = (I-\mathbf{uv}^T)(I+\gamma \mathbf{uv}^T) &= I + \gamma \mathbf{uv}^T - \mathbf{uv}^T - \mathbf{uv}^T \gamma \mathbf{uv}^T \\
+\implies
+( \gamma - 1) \mathbf{uv}^T + \gamma \mathbf{u} ( \mathbf{v}^T \mathbf{u}) \mathbf{v}^T &= 
+( \gamma - 1) \mathbf{uv}^T + ( \mathbf{v}^T \mathbf{u}) \gamma \mathbf{u} \mathbf{v}^T
+= 0
+\end{align}
+
+Since both $\gamma$ and the inner product of $\mathbf{u}$ and $\mathbf{v}$, $\mathbf{u}^T \mathbf{v}$, are scalars. Dividing by $\mathbf{uv}^T$ and solving for $\gamma$ yields
+
+\begin{align}
+\nonumber
+( \gamma - 1) + ( \mathbf{v}^T \mathbf{u}) \gamma &= 0 \\
+\implies
+\gamma = \frac{1}{1+ \mathbf{v}^T \mathbf{u}}
+\end{align}
+
+\subsection*{c.}
+As $\mathbf{v}^T \mathbf{u}$ approaches one, $\gamma$ approaches infinity. In that case, the matrix $A$ is singular and thus not invertible.
+
+\subsection*{d.}
+$\kappa_2(A) = ||A||_2 ||A^{-1}||_2 = ||I-\mathbf{uv}^T||_2 ||I+\gamma \mathbf{uv}^T||_2 $
+
+An upper bound for $\kappa_2(A)$ can be found by using the triangle inequality.
+
+\begin{align*}
+\kappa_2(A) & \leq (||I||_2-||\mathbf{uv}^T||_2) (||I||_2+||\gamma \mathbf{uv}^T||_2) \\
+&= (||I||_2-||\mathbf{uv}^T||_2) (||I||_2+||\gamma \mathbf{uv}^T||_2)
+\end{align*}
+
+
+
+
+%\bibliosub
+\end{document}

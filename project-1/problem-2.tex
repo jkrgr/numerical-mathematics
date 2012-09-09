@@ -127,12 +127,14 @@ Newton's method
 	{x_1^{2}}^{(0)} + {x_2^2}^{(0)} + 2 
 \end{array}
 \right]
+
 \left[
 \begin{array}{cc} 	
 	1 \\
 	1
 \end{array}
 \right]
+
 \end{equation}
 
 \begin{equation}
@@ -141,10 +143,29 @@ x_1^{(1)} = x_2^{(1)}
 =
 \frac{{x_1^{2}}^{(0)} + {x_2^2}^{(0)} + 2 }{2(x_1^{(0)} + x_2^{(0)})} 
 \end{equation}
+\label{2a}
 
 $q.e.d$
 
+Newtons method converges to $(1,1)^T$ if $f$ is convex in the regions $x_1+x_2>0$ and $x_1+x_2<0$. In other words, Newton's method converges to the only zero point in the area $D^2f$ iff $D^2 f$ 
 
+\begin{equation}
+D^2\mathbf{f}(\mathbf{x})
+=
+\left[ 	
+	\begin{array}{cc} 
+		\frac{d^2 f_1}{dx_1^2} & \frac{d^2 f_1}{dx_2^2} \\ 
+		\frac{d^2 f_2}{dx_1^2} & \frac{d^2f_2}{dx_2^2}  
+	\end{array} 
+\right]
+=
+\left[ 	
+	\begin{array}{cc} 
+		2 & 2 \\ 
+		0    & 0  
+	\end{array} 
+\right] 
+\end{equation}
 
 
 \begin{minted}{matlab}
@@ -152,16 +173,6 @@ $q.e.d$
 \end{minted}
 
 \subsection*{b.}
-
-
-
-\inputminted[linenos]{matlab}{newton_c.m}
-
-\begin{figure}
-\includegraphics[width=\textwidth]{euler_plot}
-\caption{Plot shows $y_1$ and $y_2$ that was found through Euler's method.}
-\end{figure}
-
-
+-
 %\bibliosub
 \end{document}
