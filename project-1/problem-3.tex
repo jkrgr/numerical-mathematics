@@ -4,7 +4,7 @@
 \section*{Problem Three}
 
 \subsection*{a.}
-Let $\mathbf{v} \neq 0$. Each row of $\mathbf{uv}^T$ is a multiple of $\mathbf{v}^T$ so the row space of $\mathbf{uv}^T$ has dimension 1. This implies that the rank of the matrix is 1.
+$\mathbf{a}$ and $\mathbf{b}$ are column vectors. Let $\mathbf{v} \neq 0$. Each row of $\mathbf{uv}^T$ is a multiple of $\mathbf{v}^T$ so the row space of $\mathbf{uv}^T$ has dimension 1. This implies that the rank of the matrix is 1.
 
 \subsection*{b.}
 
@@ -35,11 +35,88 @@ $\kappa_2(A) = ||A||_2 ||A^{-1}||_2 = ||I-\mathbf{uv}^T||_2 ||I+\gamma \mathbf{u
 An upper bound for $\kappa_2(A)$ can be found by using the triangle inequality.
 
 \begin{align*}
-\kappa_2(A) & \leq (||I||_2-||\mathbf{uv}^T||_2) (||I||_2+||\gamma \mathbf{uv}^T||_2) \\
-&= (||I||_2-||\mathbf{uv}^T||_2) (||I||_2+||\gamma \mathbf{uv}^T||_2)
+\kappa_2(A) & \leq (||I||_2 + ||\mathbf{uv}^T||_2) (||I||_2+||\gamma \mathbf{uv}^T||_2) \\
+&= (1 + ||\mathbf{uv}^T||_2) (1 + |\gamma| ||\mathbf{uv}^T||_2) \\
+&= 1 + |\gamma| ||\mathbf{uv}^T||_2 + ||\mathbf{uv}^T||_2 + |\gamma| ||\mathbf{uv}^T||_2 ||\mathbf{uv}^T||_2 \\
+& \leq 1 + |\gamma| ||\mathbf{u}||_2 ||\mathbf{v}^T||_2 + ||\mathbf{u}||_2 ||\mathbf{v}^T||_2  + |\gamma| ||\mathbf{u}||_2 ||\mathbf{v}^T||_2 ||\mathbf{u}||_2 ||\mathbf{v}^T||_2  \\
+&= 1 + ||\mathbf{u}||_2 ||\mathbf{v}||_2 (1 + \gamma(1 + ||\mathbf{u}||_2 ||\mathbf{v}||_2 )) \\
+\implies
+\kappa_2(A) & \leq 1 + ||\mathbf{u}||_2 ||\mathbf{v}||_2 (1 + \gamma(1 + ||\mathbf{u}||_2 ||\mathbf{v}||_2 ))
 \end{align*}
 
+\subsection*{e.}
+Let $B = I-\alpha E^{k,l}$. The matrix $\alpha E^{k,l}$ can be written as $\alpha \mathbf{ab}^T$, where $\mathbf{a}$ and $b$ are column vectors and $\mathbf{a}(k) = 1$ and zero otherwise, and $\mathbf{b}(l) = 1$ and zero otherwise. The result from \textbf{b.} gives
 
+\begin{equation}
+B^{-1} = I + \lambda E^{k,l}
+\end{equation}
+
+Solving $I = BB^{-1}$ yields $\lambda$:
+
+\begin{align*}
+I = BB^{-1} &= (I-\alpha E^{k,l}) (I + \lambda E^{k,l}) \\
+&= I + \lambda E^{k,l} - \alpha E^{k,l} - (\alpha E^{k,l})(\lambda E^{k,l}) \\
+&= I + E^{k,l}(\lambda - \alpha) - \alpha \lambda \delta_{kl} E^{k,l} \\
+\implies
+\alpha \lambda \delta_{kl} &= \lambda - \alpha \\
+\implies
+\lambda &= \frac{\alpha}{1 - \delta_{kl} \alpha}  
+\end{align*}
+
+$\delta_{kl}$ is the Kronecker delta function defined by
+
+\begin{equation}
+\delta_{kl}  = 
+\left\{ \begin{array}{lll}
+	0 & {\rm for} ~k \neq l \\
+	1 & {\rm for} ~k = l   
+\end{array} \right.
+\end{equation}
+
+The inverse of $B$ can thus be written as
+
+\begin{equation}
+B^{-1}  = 
+\left\{ \begin{array}{lll}
+	I + \alpha E^{k,l} & {\rm for} ~k \neq l \\
+	I + \frac{\alpha}{1 - \alpha} E^{k,l} & {\rm for} ~k = l   
+\end{array} \right.
+\end{equation}
+
+\subsection*{f.}
+$\alpha$, $k$ and $l$ must be determined such that 
+\begin{equation}
+B^{(1)} = A^{(0)}B^{(0)} = (I - \alpha E^{k,l}) B^{(0)}
+\end{equation}
+has a zero-element in position $p,q$. Then, $k$ must be equal to $p$; 
+
+\begin{equation}
+k=p
+\end{equation}
+
+The element in position $p,q$ must obey
+
+\begin{equation}
+b^{(1)}_{pq} = b^{(0)}_{pq} - \alpha b^{(0)}_{lq} = 0
+\end{equation}
+Which implies that
+\begin{equation}
+\alpha = \frac{b^{(0)}_{pq}}{b^{(0)}_{lq}} %, l \neq p
+\end{equation}
+
+$l$ must be chosen such that $b_{lq} \neq 0$. With $l<p$ one can eliminate every element under the diagonal in $B$ using basic matrix operations. The matrix
+
+\begin{equation}
+B^{(r+1)} = A^{(r)}A^{(r-1)} ... A^{(0)}B^{(0)}
+\end{equation}
+has zero-elements below row $p$ in column $p$. $A^{(k)}$ will then take on the form $I - \alpha E^{k,p}$ where $\alpha = \frac{b^{(0)}_{pk}}{b^{(0)}_{pp}}$ and $k=p+1, ..., n$
+
+\subsection{g.}
+The matrix $A^{(r)}A^{(r-1)} ... A^{(0)}B^{(0)}$ can be expressed as
+
+\begin{equation}
+A^{(r)}A^{(r-1)} ... A^{(0)}B^{(0)}
+\end{equation}
 
 
 %\bibliosub
