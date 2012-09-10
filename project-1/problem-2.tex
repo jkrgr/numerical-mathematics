@@ -52,13 +52,11 @@ $D\mathbf{f}(\mathbf{x})$ is invertible iff $\mathbf{x}_1^{(0)} + \mathbf{x}_2^{
 
 Newton's method
 
-\begin{equation}
-\mathbf{f} (\mathbf{x}^{(0)} = D \mathbf{f} (\mathbf{x}^{(0)})(\mathbf{x}^{(1)} - \mathbf{x}^{(0)}) = \mathbf{0}
-\end{equation}
-
-\begin{equation}
-\mathbf{x}^{(1)} = \mathbf{x}^{(0)} - \left[D\mathbf{f}(\mathbf{x}^{(0)})\right]^{-1} \mathbf{f} (\mathbf{x}^{(0)})
-\end{equation}
+\begin{align}
+\mathbf{f} (\mathbf{x}^{(0)} &= D \mathbf{f} (\mathbf{x}^{(0)})(\mathbf{x}^{(1)} - \mathbf{x}^{(0)}) = \mathbf{0} \\
+\implies
+\mathbf{x}^{(1)} &= \mathbf{x}^{(0)} - \left[D\mathbf{f}(\mathbf{x}^{(0)})\right]^{-1} \mathbf{f} (\mathbf{x}^{(0)})
+\end{align}
 
 \begin{equation}
 \left[ 	
@@ -145,31 +143,136 @@ x_1^{(1)} = x_2^{(1)}
 
 $q.e.d$
 
-Newtons method converges to $(1,1)^T$ if $f$ is convex in the regions $x_1+x_2>0$ and $x_1+x_2<0$. In other words, Newton's method converges to the only zero point in the area $D^2f$ iff $D^2 f$ 
+If $\mathbf{f}$ is convex in the regions $x_1+x_2>0$ and $x_1+x_2<0$, Newton's method must converge to the only zero-point in each region. 
+Hence, if it can be proved that $\mathbf{f}$ is indeed a convex function, we have proved convergence.
+
+\begin{listing}
+\caption*{Convex function}
+Let $H(\mathbf{f})$ be the Hessian matrix of $\mathbf{f}$. $\mathbf{f}$ is convex iff $H(\mathbf{f})$ is positive semidefinite.
+\end{listing}
+
+\begin{listing}
+\caption*{Positive semidefinite}
+A (real) matrix is  positive  semidefinite if all its eigenvalues are non-negative.
+\end{listing}
+
+The Hessians are
 
 \begin{equation}
-D^2\mathbf{f}(\mathbf{x})
+H(\mathbf{f_1}(\mathbf{x}))
 =
 \left[ 	
 	\begin{array}{cc} 
-		\frac{d^2 f_1}{dx_1^2} & \frac{d^2 f_1}{dx_2^2} \\ 
-		\frac{d^2 f_2}{dx_1^2} & \frac{d^2f_2}{dx_2^2}  
+		\frac{d^2 f_1}{dx_1^2} & \frac{d^2 f_1}{dx_2dx_1} \\ 
+		\frac{d^2 f_1}{dx_1dx_2} & \frac{d^2f_1}{dx_2^2}  
 	\end{array} 
 \right]
 =
 \left[ 	
 	\begin{array}{cc} 
-		2 & 2 \\ 
-		0    & 0  
+		2 & 0 \\ 
+		0 & 2  
 	\end{array} 
 \right] 
 \end{equation}
 
+\begin{equation}
+H(\mathbf{f_2}(\mathbf{x}))
+=
+\left[ 	
+	\begin{array}{cc} 
+		\frac{d^2 f_2}{dx_1^2} & \frac{d^2 f_2}{dx_2dx_1} \\ 
+		\frac{d^2 f_2}{dx_1dx_2} & \frac{d^2f_2}{dx_2^2}  
+	\end{array} 
+\right]
+=
+\left[ 	
+	\begin{array}{cc} 
+		0 & 0 \\ 
+		0 & 0  
+	\end{array} 
+\right] 
+\end{equation}
+
+
+The eigenvectors of both Hessians are non-negative (4 and 0). This proves that Newton's method converges in this case, and that it must converge to the only zero point in each region, namely to $(1,1)^T$ and $(-1,-1)^T$ if $f$ in the regions $x_1+x_2>0$ and $x_1+x_2<0$, respectively. 
+
+
+The convergence of \cref{2a} can also be shown through a little matlab/octave script. The following can be written in the interpreter.
+
+\begin{minted}{matlab}
+>> %Define the recursive function
+>> f = @(x) (x^2+1)/(2*x);
+>> % Choose any positive number
+>> x=500;
+>> i=0;
+>> % Improve answer until machine precision is reached
+>> while abs(abs(x) - 1) > eps
+>>   x = f(x);
+>>   i=i+1;
+>> end
+>> x,i
+x = 1
+i = 14
+>> % Rinse and repeat; Choose any negative number
+>> x=-500
+>> i=0;
+>> while abs(abs(x) - 1) > eps
+>>   x = f(x);
+>>   i=i+1;
+>> end
+>> x,i
+x = -1
+i =  14
+\end{minted}
+
+The algorithm clearly converges towards $1$ and $-1$. To see why consider this recurrence relation that can be formulated from \cref{2a}.
+
+\begin{equation}
+\label{rec}
+x^{(n)} = \frac{(x^{(n-1)})^2 + 1}{2x^{(n-1)}}
+\end{equation}
+
+It can be shown\footnote{The details are too extensive to have them included in this paper.} that \cref{rec} has the solution
+
+\begin{equation}
+x^{(n)} = \coth(2^n \coth^{-1}(x^{(0)}))
+\end{equation}
+
+Furthermore, the correct values emerge as expected as $n$ approaches infinity.
+
+\begin{equation}
+\lim_{n \rightarrow \infty} x^{(n)} = \lim_{n \rightarrow \infty} \coth(2^n \coth^{-1}(x^{(0)})) = 
+\left\{ \begin{array}{lll}
+	&1 & {\rm for} ~x^{(0)} > 0 \\
+   -&1 & {\rm for} ~x^{(0)} < 0
+\end{array} \right.
+\end{equation}
+
 \subsection*{b.}
--
+Continue to consider \cref{rec}. 
+Let $\epsilon_n$ be the difference between the estimate $x^{(n)}$, and the correct answer $x$. As $n$ grows, $\epsilon$ shrinks towards zero. This can be written
 
+\begin{equation}
+\epsilon_n \leq_{n \rightarrow \infty} ||x-x^{(n)}|| = ]1 - x^{(n)}|
+\end{equation}
 
+The next iteration yields
 
+\begin{align}
+\epsilon_{n+1} &\leq | 1 - x^{(n+1)}| = \left| \frac{(x^{(n)}-1)^2}{2x^{(n)}} \right| \\
+\implies
+\lim_{n \rightarrow \infty} \frac{\epsilon_{n+1}}{\epsilon_n^q} &= \lim_{n \rightarrow \infty} 
+\label{c}
+\left| \frac{(x^{(n)}-1)^{2-q}}{2x^{(n)}} \right| = c
+\end{align}
+
+\begin{listing*}
+\caption*{Order of convergence}
+If the $c$ in \cref{c} satisfies $0<c<\infty$ then method converges towards $x$ at rate (order) $q$. 
+\end{listing*}
+
+In our case, for the above to hold, $q$ must be equal to $2$. Newton's method thus here converges with an order of $2$ with $c=\frac{1}{2}$, i.e quadratic convergence.
 
 
 
