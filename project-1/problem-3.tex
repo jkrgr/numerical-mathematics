@@ -115,8 +115,52 @@ has zero-elements below row $p$ in column $p$. $A^{(k)}$ will then take on the f
 The matrix $A^{(r)}A^{(r-1)} ... A^{(0)}B^{(0)}$ can be expressed as
 
 \begin{equation}
-A^{(r)}A^{(r-1)} ... A^{(0)}B^{(0)}
+\label{3:prod}
+A = \prod\limits_{k=p+1}^n ( I - \frac{b^{(0)}_{pk}}{b^{(0)}_{pp}} ) 
 \end{equation}
+
+Since $k \neq p$ and every element has different values for $k$, and since $E^{k,p} \cdot E^{l,p}$ equals a zero-matrix for $k \neq l$, \cref{3:prod} simplifies to 
+
+\begin{equation}
+\label{prod}
+A = I - \sum \limits_{k=p+1}^n ( \frac{b^{(0)}_{pk}}{b^{(0)}_{pp}} ) 
+\end{equation}
+
+The inverse of every element in $A$ is known, so the inverse of $A$ becomes
+
+\begin{align*}
+A^{-1} &= (A^{(0)})^{-1} (A^{(1)})^{-1} ... (A^{(r)})^{-1} \\
+&= \prod\limits_{k=p+1}^n \left( A^k \right)^{-1} \\
+&= \prod\limits_{k=p+1}^n \left( I - \frac{b^{(0)}_{pk}}{b^{(0)}_{pp}} E^{k,p} \right) \\
+&= I + \sum \limits_{k=p+1}^n \frac{b^{(0)}_{pk}}{b^{(0)}_{pp}} E^{k,p} 
+\end{align*}
+
+\subsection*{h.}
+There does indeed exist a matrix $C^{k,l}$ that interchanges two rows. It's like the identity matrix, but the elements $(k,k)$ and $(l,l)$ are interchanged with $(k,l)$ and $(l,k)$, respectively.
+
+\subsection{i.}
+fda
+
+
+\subsection*{j.}
+If $A = I - \mathbf{uu}^T = I$ then $A$ is orthogonal.
+\begin{align}
+\nonumber
+A^T A &= (I - \mathbf{uu}^T )^T (I - \mathbf{uu}^T) \\
+\nonumber
+(\mathbf{uu}^T)^T &= \mathbf{uu}^T; I^T = I \\
+\implies
+\nonumber
+A^T A &= (I - \mathbf{uu}^T ) (I - \mathbf{uu}^T) = (I - \mathbf{uu}^T)^2 \\
+\nonumber 
+&= I - 2 \mathbf{uu}^T + ( \mathbf{uu}^T)^2 \\
+&= I + \mathbf{uu}^T (\mathbf{u}^T\mathbf{u} - 2)
+\label{3:i}
+\end{align}
+\cref{3:i} implies two possible values, namely $\mathbf{u} = 0$ in the trivial case, or $\mathbf{u}^T\mathbf{u} = 2$.
+$A$ is thus orthogonal if the absolute value of  $\mathbf{u}$ is equal to $\sqrt{2}$.
+
+
 
 
 %\bibliosub
