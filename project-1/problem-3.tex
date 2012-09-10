@@ -139,8 +139,74 @@ A^{-1} &= (A^{(0)})^{-1} (A^{(1)})^{-1} ... (A^{(r)})^{-1} \\
 There does indeed exist a matrix $C^{k,l}$ that interchanges two rows. It's like the identity matrix, but the elements $(k,k)$ and $(l,l)$ are interchanged with $(k,l)$ and $(l,k)$, respectively.
 
 \subsection*{i.}
--
+Let $A = I - \mathbf{uu}^T$ and $A^{-1} = I + \gamma \mathbf{uu}^T$   The eigenvalues are derived from
 
+\begin{equation}
+A \mathbf{x} = \lambda \mathbf{x}
+\end{equation}
+
+This gives
+
+\begin{equation}
+(I - \mathbf{uu}^T ) \mathbf{x} = \lambda \mathbf{x}
+\end{equation}
+
+and
+
+\begin{equation}
+(I + \gamma \mathbf{uu}^T) \mathbf{x} = \frac{\mathbf{x}}{\lambda} 
+\end{equation}
+
+
+The system is solved to find 
+\begin{equation}
+\lambda_1 = 1; ~ \lambda_2 = \frac{1}{\gamma} = 1 - \mathbf{u}^T \mathbf{u}
+\end{equation}
+
+The eigenvectors are found in a standard fashion. 
+
+$\lambda_1 = 1$:
+
+\begin{align*}
+(I - \mathbf{uu}^T ) \mathbf{x} = \mathbf{x} \\
+\implies
+\mathbf{uu}^T \mathbf{x} = 0
+\end{align*}
+
+which is satisfied for all $\mathbf{x}$ orthogonal to $\mathbf{u}$.
+
+$\lambda_2 = \frac{1}{\gamma}$:
+
+\begin{align*}
+(I - \mathbf{uu}^T ) \mathbf{x} = (1 - \mathbf{u}^T \mathbf{u}^T ) \mathbf{x} \\
+\implies
+\mathbf{x} = a \mathbf{u}
+\end{align*}
+
+for some scalar $a$. 
+
+Consider the condition number 
+
+\begin{align*}
+\kappa_2(A) &= ||A||_2 ||A^{-1}||_2 = ||I-\mathbf{uv}^T||_2 ||I+\gamma \mathbf{uv}^T||_2 \\
+\kappa_2(A) & \leq 1 + ||\mathbf{u}||_2 ||\mathbf{v}||_2 (1 + \gamma(1 + ||\mathbf{u}||_2 ||\mathbf{v}||_2 )) 
+&= 1 + ||\textbf{u}||(1+\frac{1+||\textbf{u}||}{1-||\textbf{u}||}
+\end{align*}
+
+when using the results from above. Using that A is symmetric the condition number is on the form
+
+\begin{equation}
+\kappa_2(A) = \frac{\lambda_{max}}{\lambda_{min}}
+\end{equation}
+
+In this case the condition number is given when
+
+\begin{align*}
+|1-||\textbf{u}||| > 1 \implies \kappa_2(A) = |1-||\textbf{u}||| < |1+||\textbf{u}||| \\
+|1-||\textbf{u}||| = \frac{1}{|1-||\textbf{u}|||} 
+\end{align*}
+
+when $A=I$ then $||\textbf{u}||=0$ and $\kappa_2(A) = 1$.
 
 \subsection*{j.}
 If $A = I - \mathbf{uu}^T = I$ then $A$ is orthogonal.
@@ -159,8 +225,6 @@ A^T A &= (I - \mathbf{uu}^T ) (I - \mathbf{uu}^T) = (I - \mathbf{uu}^T)^2 \\
 \end{align}
 \cref{3:i} implies two possible values, namely $\mathbf{u} = 0$ in the trivial case, or $\mathbf{u}^T\mathbf{u} = 2$.
 $A$ is thus orthogonal if the absolute value of  $\mathbf{u}$ is equal to $\sqrt{2}$.
-
-
 
 
 %\bibliosub
