@@ -27,9 +27,70 @@
 
 
 \subsection*{b.}
--
+We want to find the partial derivative and the gradient of $\phi$ given by the function
 
+\begin{equation}
+\label{eq: Phi 1}
+\phi \left(W\right) 
+= \pm \frac{1}{4} \displaystyle\sum\limits_{i=1}^n \text{kurt}(\mathbf{w}_{i}^{T} \tilde{x})
+= \pm \frac{1}{4} \left( \displaystyle\sum\limits_{i=1}^n E\left[(\mathbf{w}_{i}^{T} \tilde{x})^4\right] - 3n\right).
+\end{equation}
 
+$W$ have columns $\mathbf{w_1,\cdots,w_n}$ and entries ${w_{i,j}, 1 \leq i,j \leq n}$.
+ Phi is a measure for the non-Gaussianity, and is measured in kurtosis which is defined in scalar as
+
+\begin{equation}
+\label{eq: Kurtosis 1}
+\text{kurt}(z):= E[z^4]-3E[z^2].
+\end{equation}
+Further on, if $z$ has unitary variance the kortosis is computed as
+
+\begin{equation}
+\label{eq: Kurtosis 2}
+\text{kurt}(z):= E[z^4]-3.
+\end{equation}
+
+If we write out equation (\ref{eq: Phi 1}) we end ut with
+
+\begin{equation}
+\label{eq:Phi 3}
+\phi \left(W\right)
+= \pm \frac{1}{4} \left( E\left[ \left( w_{1,1}^{T}\tilde{x}_1+\cdots +w_{1,n}^{T}\tilde{x}_{n}\right)^4\right]
++\cdots + E\left[\left(w_{n,1}^{T}\tilde{x}_1+\cdots +w_{n,n}^{T}\tilde{x}_{n}\right)^4\right]-3n\right).
+\end{equation}
+
+Where $w_{i,j}^{T}$ is the entries for $W^{T}$. If we express the equation in sums we can write it like
+
+\begin{equation}
+\label{eq: Phi 4}
+\begin{split}
+&\phi \left(W\right)
+ = \pm \frac{1}{4} \left( \displaystyle\sum\limits_{i=1}^n E\left(\displaystyle\sum\limits_{j=1}^n \left( w_{i,j}^{T} \tilde{x}_{j} \right)^{4} \right)-3n\right)\\
+& = \pm \frac{1}{4} \left( \displaystyle\sum\limits_{i=1}^n E\left(\displaystyle\sum\limits_{j=1}^n \left( w_{j,i} \tilde{x}_{j} \right)^{4} \right)-3n\right)\\
+& =\pm \frac{1}{4} \left( \displaystyle\sum\limits_{j=1}^n E\left(\displaystyle\sum\limits_{i=1}^n \left( w_{i,j} \tilde{x}_{i} \right)^{4} \right)-3n\right).\\
+\end{split}
+\end{equation}
+
+With $y(t):=W^{T}\tilde{x}(t)$, the partial derivative of phi can the be written as
+
+\begin{equation}
+\label{eq: PD 1}
+\begin{split}
+& \frac{\partial \phi}{\partial w_{i,j}} = \pm \frac{1}{4} \left(E\left(4\tilde{x_i}\left(w_{i,j}\tilde{x_i}\right)^3\right)\right)\\
+& =\pm \left(E\left(\tilde{x_i}\left(w_{j,i}^{T}\tilde{x_i}\right)^3\right)\right)\\
+& = \pm E\left(\tilde{x_i}\left(y_{j}\right)^3\right).
+\end{split}
+\end{equation}
+
+By combining the partial deriviatives in a $n \times n$ matrix, we se that the gradient of $\phi$ is given by
+\begin{equation}
+\label{eq: gardient}
+\frac{\partial \phi}{\partial W}= \pm E\left[\tilde{x}\left(y.^{3}\right)^{T}\right].
+\end{equation}
+
+Where $y.^3$ is the vector whose components are cubes of the components of $y$.
+
+\newpage
 
 %\bibliosub
 \end{document}
