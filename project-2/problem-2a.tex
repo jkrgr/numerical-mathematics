@@ -30,7 +30,7 @@
 \section*{Problem Two}
 
 \subsection*{a.}
-The MatLab function eigroot in the attachments applies the built-in \textbf{eig} function in MatLab to factorize a given matrix A to the form $A=VDV^{\top}$, with the advantage that square rooting the diagonal matrix D requires only the square root of the individual diagonal elements.
+The \textsc{Matlab} function eigroot in the attachments applies the built-in \textbf{eig} function in \textsc{Matlab} to factorize a given matrix A to the form $A=VDV^{\top}$, with the advantage that square rooting the diagonal matrix D requires only the square root of the individual diagonal elements.
 
 The two iterative implementations described in Nicholas J. Highams paper: Newton's method for the matrix square root[ref] are as follows:
 
@@ -58,7 +58,7 @@ In analyzing operation counts, one can see that iteration method (I): $Y_{k+1}=\
 
 Figure \ref{fig:convergence plot I} is a log-plot that visualizes the values in table \ref{lol}. The easily identifiable parabola points to quadratic convergence. As mentioned, Theorem 2 in Newton's Method for the Matrix Square Root[ref] tells us that this is indeed the case. The figure also shows the linear divergence caused by the instability in the algorithm. 
 
-As the relations in equations \ref{eq: relate} and \ref{eq: relate2}  shows, implementation (III) gives the same result of the iteration  $Y_k$ as implementation (I) with $Y_{0}=Q_{0}=I$. The same quadratic convergence is therefore visualized in Figure 2. When the norm of the error approaches the limit of accuracy for the computer program, in this case MatLab, the max norm diverges, but slowly. The difference between implementation (I) and (III), will be that each iteration in implementation (III) will have a bounded effect on the max-norm, making it practically stable. The max-norm will remain almost constant in implementation (III), while it will diverge rapidly in implementation (I). Looking at the condition numbers for the different matrices and the degree of divergence in implementation (III), one can see a correlation between the high condition numbers and the rate of convergence in their respective tables.
+As the relations in equations \ref{eq: relate} and \ref{eq: relate2}  shows, implementation (III) gives the same result of the iteration  $Y_k$ as implementation (I) with $Y_{0}=Q_{0}=I$. The same quadratic convergence is therefore visualized in Figure 2. When the norm of the error approaches the limit of accuracy for the computer program, in this case \textsc{Matlab}, the max norm diverges, but slowly. The difference between implementation (I) and (III), will be that each iteration in implementation (III) will have a bounded effect on the max-norm, making it practically stable. The max-norm will remain almost constant in implementation (III), while it will diverge rapidly in implementation (I). Looking at the condition numbers for the different matrices and the degree of divergence in implementation (III), one can see a correlation between the high condition numbers and the rate of convergence in their respective tables.
 
 
 
