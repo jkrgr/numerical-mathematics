@@ -32,25 +32,33 @@
 \subsection*{a.}
 The MatLab function eigroot in the attachments applies the built-in \textbf{eig} function in MatLab to factorize a given matrix A to the form $A=VDV^{\top}$, with the advantage that square rooting the diagonal matrix D requires only the square root of the individual diagonal elements.
 
-The two iterative implementations described in Nicholas J. Highams paper Newton's method for the matrix square root[ref] are as follows:
+The two iterative implementations described in Nicholas J. Highams paper: Newton's method for the matrix square root[ref] are as follows:
 
 \begin{equation}
 (I): Y_{k+1}=\frac{1}{2}(Y_{k}+Y_{k}^{-1}A)
 \end{equation}
 
-\begin{align*}
+\begin{align}
 (III):  &P_{k+1}=\frac{1}{2}(P_{k}+Q_{k}^{-1}) \\
           & Q_{k+1}=\frac{1}{2}(Q_{k}+P_{k}^{-1})
-\end{align*}
+\label{eq: III}
+\end{align}
 
+These implementations were both derived from the iterations of Newton's method. Theorem 2 in Highams paper tells us that iteration method (I) converges quadratically with the identity matrix $I$ as the starting matrix $Y_0$. In method (III) the starting matrix is $Q_0=I$ with $P_0=A$. The relationship between the implementations being 
+\begin{equation}
+P_k=Y_k \\
+\label{eq: relate2}
+\end{equation}
+\begin{equation}
+Q_k=A^{-1}Y_k
+\label{eq: relate}
+\end{equation}
 
+In analyzing operation counts, one can see that iteration method (I): $Y_{k+1}=\frac{1}{2}(Y_{k}+Y_{k}^{-1}A)$ includes $Y_{k}^{-1}A$. This is the solution of the linear system $Y_{k}x=A$. Using LU factorization, the operation count of solving such a system is $\frac{2}{3}n^{3}$ The other operations are matrix addition and multiplication of a constant, which are operations of the lower order, $O(n^{2})$. Iteration method (III) includes the inversion of two matrices, each with an operation count of $n^{3}$, for a combined count of $2n^{3}$. The operation counts for both implementations will therefore be of the order $O(n^3)$.
 
-In analyzing operation counts, one can see that iteration method (I): $Y_{k+1}=\frac{1}{2}(Y_{k}+Y_{k}^{-1}A$ includes $Y_{k}^{-1}A$. This is the solution of the linear system $Y_{k}x=A$. Using LU factorization, the operation count of solving such a system is $\frac{2}{3}n^{3}$ The other operations are matrix addition and multiplication of a constant, which are operations of the lower order $O(n^{2})$. Iteration method (III) includes the inversion of two matrices, each with an operation count of $n^{3}$, for a combined count of $2n^{3}$.
+Figure \ref{fig:convergence plot I} is a log-plot that visualizes the values in table \ref{lol}. The easily identifiable parabola points to quadratic convergence. As mentioned, Theorem 2 in Newton's Method for the Matrix Square Root[ref] tells us that this is indeed the case. The figure also shows the linear divergence caused by the instability in the algorithm. 
 
-Figure 1 is a log-plot that visualizes the values in table ??. The easily identifiable parabola points to quadratic convergence. Theorem 2 in Newton's Method for the Matrix Square Root[ref] tells us that this is indeed the case. The figure also shows the linear divergence caused by the instability in the algorithm. 
-
-As equation III[ref] shows, implementation (III) gives the same result of the iteration  $Y_k$ as implementation (I) with $Y_{0}=Q_{0}=I$. The same quadratic convergence is therefore visualized in Figure 2. When the norm of the error approaches the limit of accuracy for the computer program, in this case MatLab, the max norm diverges. The difference between implementation (I) and (III), will be that each iteration in implementation (III) will have a bounded effect on the max-norm, making it practically stable. The max-norm will remain almost constant in implementation (III), while it will diverge wildly in implementation (I). Looking at the condition numbers for the different matrices and the degree of divergence in implementation (III), one can see a correlation between the high condition numbers of $A_{100\times 100}$ and $A_{1000\times 1000}$ and the divergence in their respective tables. The matrices with lower condition numbers also diverge with implementation (III), but it's not evident with the limited iterations in their tables.¨
-
+As the relations in equations \ref{eq: relate} and \ref{eq: relate2}  shows, implementation (III) gives the same result of the iteration  $Y_k$ as implementation (I) with $Y_{0}=Q_{0}=I$. The same quadratic convergence is therefore visualized in Figure 2. When the norm of the error approaches the limit of accuracy for the computer program, in this case MatLab, the max norm diverges, but slowly. The difference between implementation (I) and (III), will be that each iteration in implementation (III) will have a bounded effect on the max-norm, making it practically stable. The max-norm will remain almost constant in implementation (III), while it will diverge rapidly in implementation (I). Looking at the condition numbers for the different matrices and the degree of divergence in implementation (III), one can see a correlation between the high condition numbers and the rate of convergence in their respective tables.
 
 
 
