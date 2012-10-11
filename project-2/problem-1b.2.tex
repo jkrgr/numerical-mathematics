@@ -1,0 +1,83 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% This is how you write code:
+%
+% \begin{minted}{matlab}
+% foo = [2 1 0;1 4 3;2 4.5 6];
+% \end{minted}
+%
+
+% This is how you import code:
+% 
+% \inputminted[linenos]{matlab}{foo_bar.m}
+%
+ 
+% Most figures are imported this way:
+%
+% \begin{figure}
+% \includegraphics[width=\textwidth]{foo_figure}
+% \caption{This is a caption}
+% \end{figure}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\documentclass[00-main.tex]{subfiles}
+\begin{document}
+
+
+
+\subsection*{b.}
+Let $H$ be an $n \times n$ Hessenberg matrix. An upper Hessenberg matrix is a matrix whose elements below its first subdiagonal are zero, and an upper Hessenberg matrix is a matrix whose elements above its first superdiagonal is zero.The elements to be 'zeroed out' are in the subdiagonal of $H$ if $H$ is in upper triangular form, and in the superdiagonal of $H$ if $H$ is in lower triangular form. 
+$H$ is thus at most $n-1$ Givens rotations away from becoming a triangular matrix, since the number of elements in the first sub- or superdiagonal is $n-1$. 
+
+\subsubsection*{Procedure for computing the $QR$-decomposition of an upper Hessenberg matrix using Givens rotations}
+\begin{algorithmic}
+\Function{compute-QR}{x,y}
+\State \# For all elements in $H$ that needs to be zeroed out 
+\For{$k = 1,2, ..., n-1$}
+  \State \# Calculate the Givens matrix for 
+  \State \# zeroing out the element in $H(k+1,k)$ 
+  \State $[c_k, s_k] \gets \textsc{calculate-givens}(H[k,k], H[k+1,k])$
+  \State
+  \State \# Apply the Givens rotation from the left
+  \State $ H \gets 
+  			 \left[ \begin{array}{c c}
+      			c_k & s_k \\
+     			-s_k & c_k
+  			 \end{array} \right]
+		   H
+		$
+\EndFor
+\For{$k = 1,2, ..., n-1$}
+  \State \# Apply the Givens rotation from the right
+  \State $ H \gets H 
+  			\left[ \begin{array}{c c}
+      			c_k & s_k \\
+     			-s_k & c_k
+  			\end{array} \right]
+		$
+\EndFor
+\EndFunction
+\end{algorithmic}
+
+\subsubsection*{Sub-procedure for calculating the givens elements $s$ and $c$}
+\begin{algorithmic}
+\Function{calculate-givens}{x,y}
+\State $r \gets \sqrt[]{x^2+y^2 }$ 
+\State $c \gets \frac{x}{r} $
+\State $s \gets \frac{y}{r} $
+\State \Return $[c, s]$
+\EndFunction
+\end{algorithmic}
+
+\subsubsection*{Number of flops for the $QR$-decomposition}
+The $\textsc{calculate-givens}$ procedure contains two additions, two multiplications, two divisions, and one square root. 
+Let $d$ be the number of flops for performing division, and let $r$ be the number of flops for performing a square root. 
+In total $\textsc{calculate-givens}$ performs $4+2d+r$ flops. In $\textsc{compute-QR}$, $\textsc{calculate-givens}$ is performed $n-1$ times. 
+
+
+
+
+%\bibliosub
+\end{document}
