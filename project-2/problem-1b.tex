@@ -76,7 +76,7 @@ In the following it is assumed that $H$ is in upper form.
 \EndFunction
 \end{algorithmic}
 
-\subsubsection*{Number of flops for the $QR$-decomposition}
+\subsubsection*{Number of flops for transforming H to upper triangular form}
 The $\textsc{calculate-givens}$ procedure contains one addition, two multiplications, two divisions, and one square root. 
 Let $d$ be the number of flops for performing division, and let $r$ be the number of flops for performing a square root. 
 In total $\textsc{calculate-givens}$ performs $3+2d+r$ flops. In $\textsc{compute-QR}$, $\textsc{calculate-givens}$ is performed $n-1$ times. 
