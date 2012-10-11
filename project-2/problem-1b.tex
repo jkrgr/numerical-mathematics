@@ -87,11 +87,9 @@ It is here assumed that \textsc{matlab} carries out a matrix multiplication of a
 All but 2 rows of the matrix $A$ will stay constant if a Givens rotation is applied, which is the basis of the assumption. 
 The resulting matrix is a $2\times n$ matrix with $2n$ elements. 
 Calculating each element is a scalar product which for this problem requires 3 operations. 
-The total operation cost of the multiplication is therefore $2n\cdot 3=6n$. 
-}. 
+The total operation cost of the multiplication is therefore $2n\cdot 3=6n$. }
 
-The total number of flops becomes $(n-1)6n+(n-1)(3+r+2d)$, a polynomial of order $O(n^2)$.
-\footnote{$Q$ is then calculated in $(n-1)6n$ more flops}
+The total number of flops \footnote{$Q$ can then be calculated in $(n-1)6n$ more flops} becomes $(n-1)6n+(n-1)(3+r+2d)$, a polynomial of order $O(n^2)$. \footnote{Note that a $QR$-decomposition with a full matrix would require a cost of $O(n^3)$, so we have gained a factor of $O(n)$ by doing the calculation in Hessenberg form.}
 
 %\bibliosub
 \end{document}
