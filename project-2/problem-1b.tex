@@ -40,7 +40,8 @@ $H$ is thus at most $n-1$ Givens rotations away from becoming a triangular matri
   \State \# zeroing out the element in $H(k+1,k)$ 
   \State $[c_k, s_k] \gets \textsc{calculate-givens}(H[k,k], H[k+1,k])$
   \State
-  \State \# Apply the Givens rotation from the left
+  \State \# Apply the Givens rotation from the left,
+  \State \# since $R=G_{k-1}G_{k-2} ... G_{2}G_{1}H$
   \State $ H \gets 
   			 \left[ \begin{array}{c c}
       			c_k & s_k \\
@@ -49,9 +50,12 @@ $H$ is thus at most $n-1$ Givens rotations away from becoming a triangular matri
 		   H
 		$
 \EndFor
+\State $R \gets H$
+\State $Q \gets I$
 \For{$k = 1,2, ..., n-1$}
-  \State \# Apply the Givens rotation from the right
-  \State $ H \gets H 
+  \State \# Apply the Givens rotation from the right,
+  \State \# since $Q=G_{1}G_{2}...G_{k-1}$
+  \State $ Q \gets Q 
   			\left[ \begin{array}{c c}
       			c_k & s_k \\
      			-s_k & c_k
@@ -76,6 +80,7 @@ The $\textsc{calculate-givens}$ procedure contains two additions, two multiplica
 Let $d$ be the number of flops for performing division, and let $r$ be the number of flops for performing a square root. 
 In total $\textsc{calculate-givens}$ performs $4+2d+r$ flops. In $\textsc{compute-QR}$, $\textsc{calculate-givens}$ is performed $n-1$ times. 
 
+Matrix multiplication with the Givens matrix is performed $2 \times (n-1)$ times. For every such multiplication, we have 
 
 
 
