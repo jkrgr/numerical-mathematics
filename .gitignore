@@ -1,4 +1,5 @@
 octave-core
+*.synctex
 *.dvi
 *.bbl
 *.blg
