@@ -28,20 +28,36 @@
 
 
 \subsection*{b.}
-An upper Hessenberg matrix $H$ is a matrix whose elements below its first subdiagonal are zero, and an upper Hessenberg matrix is a matrix whose elements above its first superdiagonal is zero. $H$ is thus at most $n-1$ Givens rotations away from becoming a triangular matrix, since the number of elements in the first sub- or superdiagonal is $n-1$.
+Let $H$ be an $n \times n$ Hessenberg matrix. An upper Hessenberg matrix is a matrix whose elements below its first subdiagonal are zero, and an upper Hessenberg matrix is a matrix whose elements above its first superdiagonal is zero.The elements to be 'zeroed out' are in the subdiagonal of $H$ if $H$ is in upper triangular form, and in the superdiagonal of $H$ if $H$ is in lower triangular form. 
+$H$ is thus at most $n-1$ Givens rotations away from becoming a triangular matrix, since the number of elements in the first sub- or superdiagonal is $n-1$. 
 
-\subsubsection*{Procedure for computing the $QR$-decomposition of $H$ using Givens rotations}
+\subsubsection*{Procedure for computing the $QR$-decomposition of an upper Hessenberg matrix using Givens rotations}
 \begin{algorithmic}
-\If {$H$ is in upper triangular form}
-\Comment{This is a comment}
-  \State 
-    do stuff
-\ElsIf{$H$ is in upper triangular form}
-  \State    
-    \For{$i = 1 \to 10$} 
-      \State $i \gets i + 1$
+\State \# For all elements in $H$ that needs to be zeroed out 
+\For{$k = 1,2, ..., n-1$}
+  \State \# Calculate the Givens matrix for 
+  \State \# zeroing out the element in $H(k+1,k)$ 
+  \State $[c_k, s_k] \gets \textbf{givens}(H[k,k], H[k+1,k])$
+  \State
+  \State \# Apply the Givens rotation from the left
+  \State $ H \gets 
+  			 \left[ \begin{array}{c c}
+      			c_k & s_k \\
+     			-s_k & c_k
+  			 \end{array} \right]
+		   H
+		$
 \EndFor
-\EndIf
+\For{$k = 1,2, ..., n-1$}
+  \State \# Apply the Givens rotation from the right
+  \State $ H \gets H 
+  			\left[ \begin{array}{c c}
+      			c_k & s_k \\
+     			-s_k & c_k
+  			\end{array} \right]
+		$
+\EndFor
+
 \end{algorithmic}
 
 %\bibliosub
