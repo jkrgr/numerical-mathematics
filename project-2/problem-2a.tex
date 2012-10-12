@@ -61,9 +61,6 @@ Figure \ref{fig:convergence plot I} is a log-plot that visualizes the values for
 As the relations in equations (\ref{eq: relate}) and (\ref{eq: relate2})  shows, implementation (III) gives the same result of the iteration  $Y_k$ as implementation (I) with $Y_{0}=Q_{0}=I$. The same quadratic convergence is therefore visualized in Figure 2. When the norm of the error approaches the limit of accuracy for the computer program, in this case \textsc{Matlab}, the max norm diverges, but slowly. The difference between implementation (I) and (III), will be that each iteration in implementation (III) will have a bounded effect on the max-norm, making it practically stable. The max-norm will remain almost constant in implementation (III), while it will diverge rapidly in implementation (I). Looking at the condition numbers in table \ref{tull} for the different matrices and the degree of divergence in implementation (III), one can see a correlation between the high condition numbers and the rate of convergence in their respective tables.
 
 
-\begin{thebibliography}{00}
-\bibitem{paper} Nicholas J. Higham \textit{Newton's Method for the Matrix Square Root} MATHEMATICS COMPUTATION VOLUME 46, NUMBER 174, APRIL 1986, Pages 537-549
-\end{thebibliography}
 
 %\bibliosub
 \end{document}
