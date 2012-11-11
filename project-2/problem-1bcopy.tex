@@ -1,0 +1,37 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% This is how you write code:
+%
+% \begin{minted}{matlab}
+% foo = [2 1 0;1 4 3;2 4.5 6];
+% \end{minted}
+%
+
+% This is how you import code:
+% 
+% \inputminted[linenos]{matlab}{foo_bar.m}
+%
+ 
+% Most figures are imported this way:
+%
+% \begin{figure}
+% \includegraphics[width=\textwidth]{foo_figure}
+% \caption{This is a caption}
+% \end{figure}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\documentclass[00-main.tex]{subfiles}
+\begin{document}
+
+
+
+\subsection*{b.}
+An upper Hessenberg matrix $H$ is a matrix whose elements below its first subdiagonal are zero, and an upper Hessenberg matrix is a matrix whose elements above its first superdiagonal is zero. $H$ is thus at most $n-1$ Givens rotations away from becoming a triangular matrix, since the number of elements in the first sub- or superdiagonal is $n-1$. Finding the Givens Rotation for a given Hessenberg matrix requires the calculation of a $\cos(\theta)$ and a $\sin(\theta)$ from each matrix. Finding these will be a set amount of scalar operations of order $O(1)$. Finding a radius requires 3+r operations, where r is the amount of operations for finding the square root: $r=\sqrt{x_{1}^2+x_{2}^2}$. Finding the $\cos(\theta)$ and $\sin(\theta)$ from $r$ is $2d$ operations, where d is the amount of operations for floating point division: $\cos(\theta)=x_{1}/r$ and $\sin(\theta)=x_{2}/r$. This is a total of $(3+r+2d)$ operations. We assume our algorithm for multiplication of a Givens matrix $G$ and matrix $A$ applies the multiplication of the $2\times2$ Givens rotation with a $2\times n$ matrix extracted from A. The fact that all but 2 rows of the matrix A will stay constant if a givens rotation is applied, is the basis for our assumption. The resulting matrix will be a $2\times n$ matrix with $2n$ elements. Calculating each element is a scalar product which for this problem requires 3 operations. The total operation cost of the multiplication will be $2n\cdot 3=6n$. In conclusion, with $n-1$ Givens rotations the multiplication cost will be $6n(n-1)$, calculating $\cos(\theta)$ and $\sin(\theta)$ for $n-1$ rotations will have a cost of $(3+r+2d)(n-1)$. Thus making the total cost $6n(n-1)+(3+r+2d)(n-1)$, a polynomial of order $O(n^2)$. Now that the cost for finding R is found, the cost of Q will be inverting the product of Givens matrices which has the cost $O(n^3)$.
+
+
+
+
+%\bibliosub
+\end{document}

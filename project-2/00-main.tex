@@ -2,8 +2,8 @@
 %bruk report for kapittelinndeling
 
 %tilpass for norske forhold, det er jo en fordel at æ, ø og å virker uten å måtte bruke spesialkoder for dem
-\usepackage{ucs}
-\usepackage[utf8x]{inputenc}
+%\usepackage{ucs}
+%\usepackage[utf8x]{inputenc}
 %\usepackage[norsk]{babel}% kommenter ut om du skriver på engelsk
 \usepackage[norsk,english]{babel} 
 
@@ -35,8 +35,8 @@
 \usepackage{subfiles}
 % Syntax highlighting
 \usepackage{listings}
-%\usepackage{minted}
-%\usemintedstyle{vs}
+\usepackage{minted}
+\usemintedstyle{vs}
 \usepackage{color}
 
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
@@ -96,8 +96,8 @@
 \vspace*{0.5cm}
 \Large{\textit{Semester Project - Part Two}}}
 
-\author{Candidate number\\
-10003}
+\author{Candidate numbers\\
+10003, 10056, 10071}
 
 %% Commands for including references and toc in subfiles when compiled
 %% without including them more than once when including main tex-file
@@ -156,9 +156,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Including chapters 
 \subfile{problem-1a.tex}
+%\subfile{problem-1bcopy.tex}
 \subfile{problem-1b.tex}
+
 \subfile{problem-2a.tex}
+
 \subfile{problem-2b.tex}
+
+\begin{thebibliography}{00}
+\bibitem{paper} Nicholas J. Higham \textit{Newton's Method for the Matrix Square Root} MATHEMATICS COMPUTATION VOLUME 46, NUMBER 174, APRIL 1986, Pages 537-549
+\end{thebibliography}
 
 %% Inserting reference list
 \thispagestyle{empty}
@@ -180,6 +187,11 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Including appendices
+\subfile{problem-2acode.tex}
+\subfile{problem-2attach.tex}
+
+
+
 %\subfile{app-paramtable.tex}
 %\subfile{app-sourcecode.tex}
 
