@@ -1,0 +1,115 @@
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% This is how you write code:
+%
+% \begin{minted}{matlab}
+% foo = [2 1 0;1 4 3;2 4.5 6];
+% \end{minted}
+%
+
+% This is how you import code:
+% 
+% \inputminted[linenos]{matlab}{foo_bar.m}
+%
+ 
+% Most figures are imported this way:
+%
+% \begin{figure}
+% \includegraphics[width=\textwidth]{foo_figure}
+% \caption{This is a caption}
+% \end{figure}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\documentclass[00-main.tex]{subfiles}
+\begin{document}
+
+\section*{Problem 1}
+
+\subsection*{1a)}
+
+Let $W=W(\tau)$, and denote with $\dot{W}$ the deriviative with respect to $\tau$. Given the system of differential equations 
+
+\begin{equation}
+\label{eq: Grad(W)}
+\dot{W}=-\text{grad}(W), \: \; \: \text{grad}(W):=(\frac{\partial \phi}{\partial W}W^{T} - W\frac{\partial \phi}{\partial W}^{T})W.
+\end{equation}
+
+In the following tasks lets consider$\frac{\partial \phi}{\partial W}=A$.
+First verify that if $W(0)^{T}W(0)=I$ then $W(\phi)^{T}W(\phi)=I$, for all $ \phi \geq 0$. To verify this consider
+
+\begin{equation}
+\label{eq: integration 1}
+\int _{0}^{\tau} \frac{d}{ds} (W(s)^{T}W(s)) ds = W(\phi)^{T}W(\phi) - W(0)^{T}W(0).
+\end{equation}
+
+Lets $\dot{W}$ equal $S(W)W$, where $S(W)$ is a skew-symmetric matrix.
+ Where $\frac{d}{ds} (W(s)^{T}W(s))$ can be written out as the following from equtaion(\ref{eq: Grad(W)}).
+ 
+ 
+ \begin{equation}
+ \label{eq: Div WtW}
+ \begin{split}
+ &\frac{d}{ds} (W(s)^{T}W(s))=\dot{W^{T}}W+W^{T}\dot{W}=W^{T}(-\text{grad}(W))+(-\text{grad}(W))^{T}W \\
+ &=W^{T}(AW^{T}-WA^{T})W+W^{T}(WA^T-AW^T)W\\
+ &=W^{T}(AW^{T}-WA^{T})W-W^{T}(AW^T-WA^{T})W\\
+ &=W^{T}S(W)W-W^{T}S(W)W=0.
+ \end{split}
+ \end{equation}
+ 
+ We thereby have from equation(\ref{eq: integration 1})
+ \begin{equation}
+ \label{eq: Verifiy 1}
+ \begin{split}
+ &\int _{0}^{\tau} \frac{d}{ds} (W(s)^{T}W(s)) ds = W(\phi)^{T}W(\phi) - W(0)^{T}W(0) = 0 \\
+ &\Longrightarrow W(\phi)^{T}W(\phi) = W(0)^{T}W(0).
+\end{split} 
+ \end{equation}
+ 
+ Lets now consider the function $\gamma(\tau)$
+ 
+ \begin{equation}
+ \label{eq: gamma}
+ \gamma(\tau):=\phi(W(\tau)),
+ \end{equation}
+ 
+ and show that $\gamma(\tau_1) \leq \gamma(\tau_0)$ if $\tau_1 \geq \tau_0$. The derivative of $\gamma$ can be expressed as
+ 
+ \begin{equation}
+ \label{eq: div gamma}
+ \dot{\gamma}(\tau)=\text{trace}(\frac{\partial \phi}{\partial W}^{T} \dot{W}(\tau)).
+ \end{equation}
+ 
+ Where 'trace' indicates the trace of the matrix, the sum of the diagonal elements in the matrix.
+ 
+ First we show that $\dot{\gamma(\tau)}\leq 0$, and we let$W^{T}W=I$.
+ 
+ \begin{equation}
+ \label{eq: Verify 2}
+ \begin{split}
+ &\text{By using the following trace-properties, and Cauchy-Schwarz inequality for innerproduct:}\\
+ & 1)\mid <A,B> \mid ^{2} \leq  \:<A,A>*<B,B>, \: \text{where} <A,B>=\text{trace}(A^{*}B) \\
+ & 2)\: \text{trace}(A^{T}B)\leq\sqrt{\text{trace}(A^{T}A)}\sqrt{\text{trace}(B^{T}B}) \\
+ & 3)\: \text{trace}(AB)=\text{trace}(BA), \text{the trace is invariant under cyclic permutations, i.e}\\
+ & \text{trace}(ABCD)=\text{trace}(ACDB)=\text{trace}(ADCB)\\
+ & 4)\: \text{trace}(A+B)=\text{trace}(A)+\text{trace}(B)\\
+ &\text{We get the following expression}\\
+ &\dot{\gamma}(\tau)=\text{trace}(\frac{\partial \phi}{\partial W}^{T} \dot{W}(\tau))\\
+ &= \text{trace}(-A^{T}(AW^{T} -WA^{T})W)\\
+ &= \text{trace}(-A^{T}AW^{T}W+A^{T}WA^{T}W)\\
+ &= \text{trace}(A^{T}WA^{T}W-A^{T}AW^{T}W) \\
+ &= \text{trace}(A^{T}WA^{T}W) -\text{trace}(A^{T}AW^{T}W)\\
+ &\leq \sqrt{\text{trace}(A^{T}A)} \sqrt{\text{trace}(W^{T}AW^{T}WA^{T}W)} -\text{trace}(A^{T}AW^{T}W)\\
+ &=\sqrt{\text{trace}(A^{T}A)} \sqrt{\text{trace}(W^{T}AIA^{T}W)} -\text{trace}(A^{T}AI)\\
+ &=\sqrt{\text{trace}(A^{T}A)} \sqrt{\text{trace}(A^{T}AW^{T}W)} -\text{trace}(A^{T}A)\\
+ &=\sqrt{\text{trace}(A^{T}A)} \sqrt{\text{trace}(A^{T}AI)} -\text{trace}(A^{T}A)\\
+ &=\sqrt{\text{trace}(A^{T}A)} \sqrt{\text{trace}(A^{T}A)} -\text{trace}(A^{T}A)\\
+ &=\text{trace}(A^{T}A) -\text{trace}(A^{T}A)=0\: , \: \Longrightarrow \dot{\gamma}(\tau) \leq 0.
+ \end{split}
+ \end{equation}
+ 
+ Since $\dot{\gamma}(\tau)\leq 0$ for all values of $\tau$ it is thereby given that $\gamma(\tau_1) \leq \gamma(\tau_0)$ if $\tau_1 \geq \tau_0$ since $\gamma$ is deacreasing when $\tau$ is inreasing.
+ 

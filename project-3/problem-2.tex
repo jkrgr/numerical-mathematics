@@ -1,0 +1,153 @@
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% This is how you write code:
+%
+% \begin{minted}{matlab}
+% foo = [2 1 0;1 4 3;2 4.5 6];
+% \end{minted}
+%
+
+% This is how you import code:
+% 
+% \inputminted[linenos]{matlab}{foo_bar.m}
+%
+ 
+% Most figures are imported this way:
+%
+% \begin{figure}
+% \includegraphics[width=\textwidth]{foo_figure}
+% \caption{This is a caption}
+% \end{figure}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\documentclass[00-main.tex]{subfiles}
+\begin{document}
+
+\section*{Problem 2}
+
+\subsection*{a)}
+ 
+We want to construct a Lagrange interpolation polynomial $p_1$ of degree $n=1$, for a continuous funion $f$ defined on the interval [-1,1] using interpolation points $x_0=-1$ and $x_1=1$. The Lagrange interpolation polynomial is given by the equation
+
+\begin{equation}
+\label{eq: Lagrange 1}
+p_{n}=\sum\limits_{k=0}^n L_{k}(x)f(x_{k}).
+\end{equation}
+
+Where $L_{k}$ is defined as
+\begin{equation}
+\label{eq: prod L}
+L_{k}(x)=\prod\limits_{i=0, i\neq k}^n \frac{x - x_{i}}{x_{k}-x_{i}}.
+\end{equation}
+
+For the given interpolation points $L_{k}(x)$ yields the following
+
+\begin{equation}
+\label{eq: prod L 2}
+\begin{split}
+& L_{0}(x)=\prod\limits_{i=0, i\neq 0}^1 \frac{x - x_{1}}{x_{0}-x_{1}}=\frac{x-1}{-1-1}=\frac{1}{2}(1-x)\\
+& L_{1}(x)=\prod\limits_{i=0, i\neq 1}^1 \frac{x - x_{0}}{x_{1}-x_{0}}=\frac{x-(-1)}{1-(-1)}=\frac{1}{2}(x+1).
+\end{split}
+\end{equation}
+
+The interpolation polynomial is thereby given as
+
+\begin{equation}
+\label{eq: interpolation poly}
+\begin{split}
+& p_{1}=\sum\limits_{k=0}^1 L_{k}(x)f(x_{k})=L_{0}f(x_{0})+L_{1}f(x_{1})\\
+&=\frac{1}{2}(1-x)f(x_{0})+\frac{1}{2}(x+1)f(x_{1}).
+\end{split}
+\end{equation}
+
+Lets now consider that the second derivative of $f$ exsist and is continous on [-1,1]. We want to show that
+
+\begin{equation}
+\label{eq: ineq Lagrange}
+\mid f(x)-p_{1}(x)\mid \leq \frac{M_{2}}{2}(1-x^{2})\leq\frac{M_{2}}{2} \: , \: x\in[-1,1] ,
+\end{equation}
+
+where $M_{2}=\text{max}_{x\in[-1,1]} \mid f^{''}(x)\mid$. We can write out the following equation \footnotemark
+
+\begin{equation}
+\label{eq: Ineq Lagrange 2}
+\begin{split}
+&\mid f(x)-p_{n}(x)\mid \leq \frac{M_{n+1}}{(n+1)!}\mid(x-x_0)\ldots(x-x_n)\mid\  \\
+&\mid f(x)-p_{1}(x)\mid \leq \frac{M_2}{2}\mid(x+1)(x-1)\mid =\frac{M_2}{2}\mid(x^2-1)\mid = \frac{M_2}{2}(1-x^2).
+\end{split}
+\end{equation}
+
+For the given interval, $[-1,1]$, we can write $\mid (x^2-1) \mid = (1-x^2)$. And we thereby get
+
+\begin{equation}
+\label{eq: Ineq Lagrange 3}
+\mid f(x)-p_{1}(x)\mid \leq \frac{M_{2}}{2}(1-x^{2}) = \frac{M_{2}}{2} -\frac{M_{2}}{2}x^{2} \leq \frac{M_{2}}{2}.
+\end{equation}
+
+Lets now make an example of a function $f$ and a point $\tilde{x}$ where the following equality is achieved
+
+\begin{equation}
+\label{eq: equal Lagrange 1}
+\mid f(\tilde{x})-p_{1}(\tilde{x}) \mid = \frac{M_2}{2}.
+\end{equation}
+
+If we write it further out we get the expression
+
+\begin{equation}
+\label{eq: equal Lagrange 2}
+\mid f(\tilde{x})-p_{1}(\tilde{x}) \mid = \mid f(\tilde{x}) - (1-\tilde{x})f(-1) - (1+\tilde{x})f(1) \mid = \frac{M_2}{2}\\
+\end{equation}
+
+We se from equation (\ref{eq: ineq Lagrange}) that $\tilde{x}$ need to correspond to the value of $x$ which maximize left side of the equation, which is when $x=0$. We thereby choose $\tilde{x}=0$, we can then write 
+
+\begin{equation}
+\label{eq: equal Lagrange 3}
+\mid f(0)-p_{1}(0) \mid = \mid f(0) - \frac{1}{2}(1-0)f(-1) - \frac{1}{2}(1+0)f(1) \mid = \mid f(0)-\frac{f(-1) -f(1)}{2} \mid
+\end{equation}
+
+If we now let function $f$ be a symmetric function about the y-axis and let $f(-1)=f(1)=0$, we get
+
+\begin{equation}
+\label{eq: equal Lagrange 4}
+\mid f(0) \mid = \frac{M_2}{2}
+\end{equation} 
+
+We have made som criterias that function $f$ needs to meet:\\ 
+1) $f(0)$ has to be the global maximum/minimum on the interval $[-1,1]$ so the inequality (\ref{eq: ineq Lagrange}) holds.\\
+2) $f$ is symmetric about the  y-axis.\\
+3) $f(-1)=f(1)=0 \Longrightarrow p_1(x)=0$ for simplicity\\
+4) $\mid f(0) \mid = \frac{M_2}{2}$
+\newpage
+
+A possible solution to the equality and the given criterias can be given by a second degree polynomial on the form
+
+\begin{equation}
+\label{eq: Solution 1}
+f(x)=Cx^2-C \Longrightarrow f^{''}(x)=2C\Longrightarrow M_2=|2C|
+\end{equation}
+
+
+
+Where $C$ is a constant. From the equation we see that all the criterias and the given inequality (\ref{eq: ineq Lagrange}) hold for the intervall [-1,1].
+
+\begin{equation}
+\label{eq: Solution 2}
+\begin{split}
+&\mid f(x)-p_{1}(x)\mid \leq \frac{M_{2}}{2}(1-x^{2})\leq\frac{M_{2}}{2} \: , \: x\in[-1,1] \\
+&\mid Cx^{2}-C - 0\mid \leq \frac{|2C|}{2}(1-x^{2}) \leq |C|\\
+&\mid x^{2} -1 \mid \leq (1-x^2) \leq 1.\\
+&(1-x^2)\leq(1-x^2) \leq 1.\\
+\end{split}
+\end{equation}
+
+
+
+
+\footnotetext[1]{Theorem 6.2, p. 183, An Introduction to Numerical Analysis, Endre Suli and David Mayers}
+
+
+
