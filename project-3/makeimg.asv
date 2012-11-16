@@ -23,6 +23,7 @@ end
 disp(W);
 fprintf('%s%g, %s%i, %s%i\n','Forward Euler, step=',steps(k),'Projection=',projectv(k),'i=' ,i)
 y=W'*xx;
+figure;
 subplot(3,3,7);
 imagesc(reshape(y(1,:),333,500));
 subplot(3,3,8);
@@ -54,5 +55,3 @@ end
 % title(['estimated source beuler ',num2str(k)]);
 % end
 
-figure;
-plot(1:i-1,difference(1:i-1));

@@ -32,7 +32,10 @@ imagesc(reshape(vader,333,500));
 
 
 % Mixing matrix
-A= ceil(5*rand(3))+1*eye(3);
+%Signal matrix
+%A=[1 2 1 ; 3 4 5; 4 1 2];
+%Semi-random matrix
+A= ceil(7*rand(3));
 x=A*S;
 
 

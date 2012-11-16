@@ -1,4 +1,4 @@
-function xx = gen()
+function [xx  x]= gen()
 %Generating the sources (Doubles indicate tilde, f.eks. xx=x.tilde)
 tt=[0:0.1:100]; 
 vv=sin(1+tt*2/pi);
