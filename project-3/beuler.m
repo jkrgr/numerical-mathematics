@@ -10,7 +10,8 @@ function [backwardt, i]=beuler(W,xx,step,iterations)
         [Q,R]=qr(backwardt);
         backward=Q;
         temp=backwardt;
-        backwardt=W-step*(gradphi(backward,xx)-backward*((gradphi(backward,xx))')*backward);
+        backwardt=W-step*(gradphi(backward,xx)-backward*...
+            ((gradphi(backward,xx))')*backward);
         i=i+1;
         maxnorm=max(max(abs(temp-backwardt)));    
     end

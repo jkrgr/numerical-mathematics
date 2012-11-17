@@ -1,35 +1,37 @@
 function W=makeimg(xx)
 %Creating I as the starting point for the Euler iterations.
-I=eye(3);
+    I=eye(3);
 
-steps=[0.2];
-projectv=[true];
+    steps=[0.2];
+    projectv=[true];
 %As the derivative of gamma approaches 0, the max(phi)
 %optimization problem will approach it's solution so we'll use the
 %derivative as a measure of how many times to run the euler method.
-for k=1
-gammad=-Inf;
-i=0;
-W=I;
-difference=zeros(1,1000);
-while (gammad<-1e-8 && i < 1000)
-    i=i+1;
-    temp=feuler(W,xx,projectv(k),steps(k));
-    difference(i)=err(temp,W,xx);
-    W=temp;
-    gammad=derivegamma(W,xx)
-end
+    for k=1
+        gammad=-Inf;
+        i=0;
+        W=I;
+        phid=zeros(1,1000);
+        while (gammad<-1e-8 && i < 1000)
+            i=i+1;
+            temp=feuler(W,xx,projectv(k),steps(k));
+            phid(i)=phif(temp,xx);
+            W=temp;
+            gammad=derivegamma(W,xx);
+        end
+        disp(W);
+        fprintf('%s%g, %s%i, %s%i\n','Forward Euler, step=',steps(k),...
+            'Projection=',projectv(k),'i=' ,i)
+        y=W'*xx;
+        subplot(3,3,7);
+        imagesc(reshape(y(1,:),333,500));
+        subplot(3,3,8);
+        imagesc(reshape(y(2,:),333,500));
+        subplot(3,3,9);
+        imagesc(reshape(y(3,:),333,500));
+    end
 
-disp(W);
-fprintf('%s%g, %s%i, %s%i\n','Forward Euler, step=',steps(k),'Projection=',projectv(k),'i=' ,i)
-y=W'*xx;
-subplot(3,3,7);
-imagesc(reshape(y(1,:),333,500));
-subplot(3,3,8);
-imagesc(reshape(y(2,:),333,500));
-subplot(3,3,9);
-imagesc(reshape(y(3,:),333,500));
-end
+%Uncomment to run the images through backward euler.
 
 % for k=2
 % gammad=-Inf;
@@ -53,6 +55,3 @@ end
 % plot(y(3,1:100),'r');
 % title(['estimated source beuler ',num2str(k)]);
 % end
-
-figure;
-plot(1:i-1,difference(1:i-1));
