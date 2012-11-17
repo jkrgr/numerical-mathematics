@@ -26,91 +26,133 @@
 
 \documentclass[00-main.tex]{subfiles}
 \begin{document}
-
 \section*{Problem 1}
-
 \subsection*{1a)}
 
-Let $W=W(\tau)$, and denote with $\dot{W}$ the derivative with respect to $\tau$. Given the system of differential equations 
+We will here present an approximate solution to the cocktail party problem using Independent Component Analysis (ICA). 
+Our starting point is the following system of differential equations,
 
 \begin{equation}
 \label{eq: Grad(W)}
 \dot{W}=-\text{grad}(W), \: \; \: \text{grad}(W):=(\frac{\partial \phi}{\partial W}W^{T} - W\frac{\partial \phi}{\partial W}^{T})W.
 \end{equation}
 
-In the following tasks lets consider$\frac{\partial \phi}{\partial W}=A$.
-First verify that if $W(0)^{T}W(0)=I$ then $W(\phi)^{T}W(\phi)=I$, for all $ \phi \geq 0$. To verify this consider
+Here $W=W(\tau)$ and the deriviative of $W$ with respect to $\tau$ is $\dot{W}$. 
+%In the following tasks consider 
+To ease the calculations let $\frac{\partial \phi}{\partial W}=A$.
+%First verify that if $W(0)^{T}W(0)=I$ then $W(\phi)^{T}W(\phi)=I$, for all $ \phi \geq 0$. To verify this consider
+We will here show that
+
+\begin{equation}
+\label{show-1a}
+W(0)^{T}W(0)=I \implies W(\phi)^{T}W(\phi)=I, \phi \geq 0
+\end{equation}
+
+holds.
+
+Consider the integral
 
 \begin{equation}
 \label{eq: integration 1}
 \int _{0}^{\tau} \frac{d}{ds} (W(s)^{T}W(s)) ds = W(\phi)^{T}W(\phi) - W(0)^{T}W(0).
 \end{equation}
 
-Lets $\dot{W}$ equal $S(W)W$, where $S(W)$ is a skew-symmetric matrix.
- Where $\frac{d}{ds} (W(s)^{T}W(s))$ can be written out as the following from equtaion(\ref{eq: Grad(W)}).
+and let $\dot{W}$ equal $S(W)W$, where $S(W)$ is a skew-symmetric matrix.
+By \cref{eq: Grad(W)} $\frac{d}{ds} \left(W(s)^{T}W(s)\right)$ can be written out as 
  
  
- \begin{equation}
+\begin{equation}
  \label{eq: Div WtW}
  \begin{split}
- &\frac{d}{ds} (W(s)^{T}W(s))=\dot{W^{T}}W+W^{T}\dot{W}=W^{T}(-\text{grad}(W))+(-\text{grad}(W))^{T}W \\
- &=W^{T}(AW^{T}-WA^{T})W+W^{T}(WA^T-AW^T)W\\
- &=W^{T}(AW^{T}-WA^{T})W-W^{T}(AW^T-WA^{T})W\\
- &=W^{T}S(W)W-W^{T}S(W)W=0.
+  &\frac{d}{ds} (W(s)^{T}W(s))=\dot{W^{T}}W+W^{T}\dot{W}=W^{T}(-\text{grad}(W))+(-\text{grad}(W))^{T}W \\
+  &=W^{T}(AW^{T}-WA^{T})W+W^{T}(WA^T-AW^T)W\\
+  &=W^{T}(AW^{T}-WA^{T})W-W^{T}(AW^T-WA^{T})W\\
+  &=W^{T}S(W)W-W^{T}S(W)W=0.
  \end{split}
- \end{equation}
+\end{equation}
+
+So that \cref{eq: integration 1} can be used to get
  
- We thereby have from equation(\ref{eq: integration 1})
- \begin{equation}
+\begin{equation}
  \label{eq: Verifiy 1}
  \begin{split}
- &\int _{0}^{\tau} \frac{d}{ds} (W(s)^{T}W(s)) ds = W(\phi)^{T}W(\phi) - W(0)^{T}W(0) = 0 \\
- &\Longrightarrow W(\phi)^{T}W(\phi) = W(0)^{T}W(0).
-\end{split} 
- \end{equation}
+    &\int _{0}^{\tau} \frac{d}{ds} (W(s)^{T}W(s)) ds = W(\phi)^{T}W(\phi) - W(0)^{T}W(0) = 0 \\
+    &\Longrightarrow W(\phi)^{T}W(\phi) = W(0)^{T}W(0).
+  \end{split}
+\end{equation}
  
- Lets now consider the function $\gamma(\tau)$
+Consider now the function $\gamma(\tau)$
  
  \begin{equation}
  \label{eq: gamma}
  \gamma(\tau):=\phi(W(\tau)),
  \end{equation}
  
- and show that $\gamma(\tau_1) \leq \gamma(\tau_0)$ if $\tau_1 \geq \tau_0$. The derivative of $\gamma$ can be expressed as
+which we will show to satisfy $\gamma(\tau_1) \leq \gamma(\tau_0)$ if $\tau_1 \geq \tau_0$. 
+
+The derivative of $\gamma$ can be expressed as
  
+  \label{eq: div gamma}
  \begin{equation}
- \label{eq: div gamma}
- \dot{\gamma}(\tau)=\text{trace}(\frac{\partial \phi}{\partial W}^{T} \dot{W}(\tau)).
+  \dot{\gamma}(\tau)=\text{tr}(\frac{\partial \phi}{\partial W}^{T} \dot{W}(\tau)).
  \end{equation}
  
- Where 'trace' indicates the trace of the matrix, the sum of the diagonal elements in the matrix.
+ Where 'tr' indicates the trace of the matrix, i.e. the sum of the diagonal elements in the matrix.
  
- First we show that $\dot{\gamma(\tau)}\leq 0$, and we let$W^{T}W=I$.
+ While letting $W^{T}W=I$, it can be shown that $\dot{\gamma(\tau)} \leq 0$. 
+ The Cauchy-Schwarz inequality for inner product (\cref{cauchy}), and the trace properties (\crefrange{trace1}{trace4}),
  
- \begin{equation}
- \label{eq: Verify 2}
- \begin{split}
- &\text{By using the following trace-properties, and Cauchy-Schwarz inequality for innerproduct:}\\
- & 1)\mid <A,B> \mid ^{2} \leq  \:<A,A>*<B,B>, \: \text{where} <A,B>=\text{trace}(A^{*}B) \\
- & 2)\: \text{trace}(A^{T}B)\leq\sqrt{\text{trace}(A^{T}A)}\sqrt{\text{trace}(B^{T}B}) \\
- & 3)\: \text{trace}(AB)=\text{trace}(BA), \text{the trace is invariant under cyclic permutations, i.e}\\
- & \text{trace}(ABCD)=\text{trace}(ACDB)=\text{trace}(ADCB)\\
- & 4)\: \text{trace}(A+B)=\text{trace}(A)+\text{trace}(B)\\
- &\text{We get the following expression}\\
- &\dot{\gamma}(\tau)=\text{trace}(\frac{\partial \phi}{\partial W}^{T} \dot{W}(\tau))\\
- &= \text{trace}(-A^{T}(AW^{T} -WA^{T})W)\\
- &= \text{trace}(-A^{T}AW^{T}W+A^{T}WA^{T}W)\\
- &= \text{trace}(A^{T}WA^{T}W-A^{T}AW^{T}W) \\
- &= \text{trace}(A^{T}WA^{T}W) -\text{trace}(A^{T}AW^{T}W)\\
- &\leq \sqrt{\text{trace}(A^{T}A)} \sqrt{\text{trace}(W^{T}AW^{T}WA^{T}W)} -\text{trace}(A^{T}AW^{T}W)\\
- &=\sqrt{\text{trace}(A^{T}A)} \sqrt{\text{trace}(W^{T}AIA^{T}W)} -\text{trace}(A^{T}AI)\\
- &=\sqrt{\text{trace}(A^{T}A)} \sqrt{\text{trace}(A^{T}AW^{T}W)} -\text{trace}(A^{T}A)\\
- &=\sqrt{\text{trace}(A^{T}A)} \sqrt{\text{trace}(A^{T}AI)} -\text{trace}(A^{T}A)\\
- &=\sqrt{\text{trace}(A^{T}A)} \sqrt{\text{trace}(A^{T}A)} -\text{trace}(A^{T}A)\\
- &=\text{trace}(A^{T}A) -\text{trace}(A^{T}A)=0\: , \: \Longrightarrow \dot{\gamma}(\tau) \leq 0.
- \end{split}
- \end{equation}
+\begin{align}
+  |<A,B>|^{2}       &\leq \:<A,A>*<B,B>, \qquad <A,B> = \text{tr}(A^{*}B) \label{cauchy} \\
+  \text{tr}(A^{T}B) &\leq \sqrt{\text{tr}(A^{T}A)}\sqrt{\text{tr}(B^{T}B}) \label{trace1} \\
+  \text{tr}(AB)     &= \text{tr}(BA) \\
+  \text{tr}(ABCD)   &= \text{tr}(ACDB) = \text{tr}(ADCB) \\  
+  \text{tr}(A+B)    &= \text{tr}(A) + \text{tr}(B) \label{trace4}
+\end{align}
+
+- and some hand crafting, 
+
+
+\begin{align*}
+\dot{\gamma}(\tau)=\text{trace}(\frac{\partial \phi}{\partial W}^{T} \dot{W}(\tau))\\
+    \text{trace}(-A^{T}(AW^{T} -WA^{T})W) = \text{trace}(-A^{T}AW^{T}W+A^{T}WA^{T}W)\\
+    = \text{trace}(A^{T}WA^{T}W-A^{T}AW^{T}W) 
+    = \text{trace}(A^{T}WA^{T}W) -\text{trace}(A^{T}AW^{T}W)\\
+    \leq \sqrt{\text{trace}(A^{T}A)} \sqrt{\text{trace}(W^{T}AW^{T}WA^{T}W)} -\text{trace}(A^{T}AW^{T}W)\\
+    = \sqrt{\text{trace}(A^{T}A)} \sqrt{\text{trace}(W^{T}AIA^{T}W)} -\text{trace}(A^{T}AI)\\
+    = \sqrt{\text{trace}(A^{T}A)} \sqrt{\text{trace}(A^{T}AW^{T}W)} -\text{trace}(A^{T}A)\\
+    = \sqrt{\text{trace}(A^{T}A)} \sqrt{\text{trace}(A^{T}AI)} -\text{trace}(A^{T}A)\\
+    = \sqrt{\text{trace}(A^{T}A)} \sqrt{\text{trace}(A^{T}A)} -\text{trace}(A^{T}A)\\
+    = \text{trace}(A^{T}A) -\text{trace}(A^{T}A)=0 \\ 
+    \Longrightarrow \dot{\gamma}(\tau) \leq 0.
+\end{align*}
  
- Since $\dot{\gamma}(\tau)\leq 0$ for all values of $\tau$ it is thereby given that $\gamma(\tau_1) \leq \gamma(\tau_0)$ if $\tau_1 \geq \tau_0$ since $\gamma$ is deacreasing when $\tau$ is inreasing.
+ provide the desired result. $\dot{\gamma}(\tau)\leq 0$ for all values of $\tau$ so that $\gamma(\tau_1) \leq \gamma(\tau_0)$ if $\tau_1 \geq \tau_0$ since $\gamma$ is decreasing when $\tau$ is increasing.
+ 
+% \begin{equation}
+%     \label{eq: Verify 2}
+%     \begin{split}
+%         &\text{By using the following trace-properties, and Cauchy-Schwarz inequality for innerproduct:}\\
+%         & 1) | <A,B> | ^{2} \leq  \:<A,A>*<B,B>, \: \text{where} <A,B>=\text{trace}(A^{*}B) \\
+%         & 2)\: \text{trace}(A^{T}B)\leq\sqrt{\text{trace}(A^{T}A)}\sqrt{\text{trace}(B^{T}B}) \\
+%         & 3)\: \text{trace}(AB)=\text{trace}(BA), \text{the trace is invariant under cyclic permutations, i.e}\\
+%         & \text{trace}(ABCD)=\text{trace}(ACDB)=\text{trace}(ADCB)\\
+%         & 4)\: \text{trace}(A+B)=\text{trace}(A)+\text{trace}(B)\\
+%         &\text{We get the following expression}\\
+%         &\dot{\gamma}(\tau)=\text{trace}(\frac{\partial \phi}{\partial W}^{T} \dot{W}(\tau))\\
+%         &= \text{trace}(-A^{T}(AW^{T} -WA^{T})W)\\
+%         &= \text{trace}(-A^{T}AW^{T}W+A^{T}WA^{T}W)\\
+%         &= \text{trace}(A^{T}WA^{T}W-A^{T}AW^{T}W) \\
+%         &= \text{trace}(A^{T}WA^{T}W) -\text{trace}(A^{T}AW^{T}W)\\
+%         &\leq \sqrt{\text{trace}(A^{T}A)} \sqrt{\text{trace}(W^{T}AW^{T}WA^{T}W)} -\text{trace}(A^{T}AW^{T}W)\\
+%         &=\sqrt{\text{trace}(A^{T}A)} \sqrt{\text{trace}(W^{T}AIA^{T}W)} -\text{trace}(A^{T}AI)\\
+%         &=\sqrt{\text{trace}(A^{T}A)} \sqrt{\text{trace}(A^{T}AW^{T}W)} -\text{trace}(A^{T}A)\\
+%         &=\sqrt{\text{trace}(A^{T}A)} \sqrt{\text{trace}(A^{T}AI)} -\text{trace}(A^{T}A)\\
+%         &=\sqrt{\text{trace}(A^{T}A)} \sqrt{\text{trace}(A^{T}A)} -\text{trace}(A^{T}A)\\
+%         &=\text{trace}(A^{T}A) -\text{trace}(A^{T}A)=0\: , \: \Longrightarrow \dot{\gamma}(\tau) \leq 0.
+%     \end{split}
+% \end{equation}
+ 
+% Since $\dot{\gamma}(\tau)\leq 0$ for all values of $\tau$ it is thereby given that $\gamma(\tau_1) \leq \gamma(\tau_0)$ if $\tau_1 \geq \tau_0$ since $\gamma$ is decreasing when $\tau$ is increasing.
  
 \end{document}

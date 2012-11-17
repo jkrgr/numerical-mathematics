@@ -64,14 +64,14 @@ The interpolation polynomial is thereby given as
 \end{split}
 \end{equation}
 
-Lets now consider that the second derivative of $f$ exsist and is continous on [-1,1]. We want to show that
+Assuming that the second derivative of $f$ exists and is continous on [-1,1], we will show that
 
 \begin{equation}
 \label{eq: ineq Lagrange}
 \mid f(x)-p_{1}(x)\mid \leq \frac{M_{2}}{2}(1-x^{2})\leq\frac{M_{2}}{2} \: , \: x\in[-1,1] ,
 \end{equation}
 
-where $M_{2}=\text{max}_{x\in[-1,1]} \mid f^{''}(x)\mid$. We can write out the following equation \footnotemark
+where $M_{2}=\text{max}_{x\in[-1,1]} \mid f^{''}(x)\mid$. We can write out the following equation\cite{book}
 
 \begin{equation}
 \label{eq: Ineq Lagrange 2}
@@ -102,7 +102,7 @@ If we write it further out we get the expression
 \mid f(\tilde{x})-p_{1}(\tilde{x}) \mid = \mid f(\tilde{x}) - (1-\tilde{x})f(-1) - (1+\tilde{x})f(1) \mid = \frac{M_2}{2}\\
 \end{equation}
 
-We se from equation (\ref{eq: ineq Lagrange}) that $\tilde{x}$ need to correspond to the value of $x$ which maximize left side of the equation, which is when $x=0$. We thereby choose $\tilde{x}=0$, we can then write 
+We see from equation (\ref{eq: ineq Lagrange}) that $\tilde{x}$ needs to correspond to the value of $x$ which maximizes the left side of the equation, which is when $x=0$. We thereby choose $\tilde{x}=0$, and we can then write 
 
 \begin{equation}
 \label{eq: equal Lagrange 3}
@@ -121,9 +121,8 @@ We have made som criterias that function $f$ needs to meet:\\
 2) $f$ is symmetric about the  y-axis.\\
 3) $f(-1)=f(1)=0 \Longrightarrow p_1(x)=0$ for simplicity\\
 4) $\mid f(0) \mid = \frac{M_2}{2}$
-\newpage
 
-A possible solution to the equality and the given criterias can be given by a second degree polynomial on the form
+A possible solution to the equality and the given criterias can be given by a second degree polynomial of the form
 
 \begin{equation}
 \label{eq: Solution 1}
@@ -132,23 +131,19 @@ f(x)=Cx^2-C \Longrightarrow f^{''}(x)=2C\Longrightarrow M_2=|2C|
 
 
 
-Where $C$ is a constant. From the equation we see that all the criterias and the given inequality (\ref{eq: ineq Lagrange}) hold for the intervall [-1,1].
+Where $C$ is a constant. From the equation we see that all the criterias are met and the given inequality (\ref{eq: ineq Lagrange}) holds for the interval [-1,1].
 
 \begin{equation}
-\label{eq: Solution 2}
-\begin{split}
-&\mid f(x)-p_{1}(x)\mid \leq \frac{M_{2}}{2}(1-x^{2})\leq\frac{M_{2}}{2} \: , \: x\in[-1,1] \\
-&\mid Cx^{2}-C - 0\mid \leq \frac{|2C|}{2}(1-x^{2}) \leq |C|\\
-&\mid x^{2} -1 \mid \leq (1-x^2) \leq 1.\\
-&(1-x^2)\leq(1-x^2) \leq 1.\\
-\end{split}
+    \label{eq: Solution 2}
+    \begin{split}
+    &\mid f(x)-p_{1}(x)\mid \leq \frac{M_{2}}{2}(1-x^{2})\leq\frac{M_{2}}{2} \: , \: x\in[-1,1] \\
+    &\mid Cx^{2}-C - 0\mid \leq \frac{|2C|}{2}(1-x^{2}) \leq |C|\\
+    &\mid x^{2} -1 \mid \leq (1-x^2) \leq 1.\\
+    &(1-x^2)\leq(1-x^2) \leq 1.\\
+    \end{split}
 \end{equation}
 
 
+\end{document}
 
 
-\footnotetext[1]{Theorem 6.2, p. 183, An Introduction to Numerical Analysis, Endre Suli and David Mayers}
-
-
-
-\end{document}
