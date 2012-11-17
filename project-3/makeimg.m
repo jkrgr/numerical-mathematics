@@ -20,7 +20,8 @@ function W=makeimg(xx)
             gammad=derivegamma(W,xx);
         end
         disp(W);
-        fprintf('%s%g, %s%i, %s%i\n','Forward Euler, step=',steps(k),'Projection=',projectv(k),'i=' ,i)
+        fprintf('%s%g, %s%i, %s%i\n','Forward Euler, step=',steps(k),...
+            'Projection=',projectv(k),'i=' ,i)
         y=W'*xx;
         subplot(3,3,7);
         imagesc(reshape(y(1,:),333,500));

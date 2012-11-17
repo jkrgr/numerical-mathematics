@@ -26,7 +26,8 @@ function W=makeplots(xx)
 %plot(0:i-1,difference);
 %title('E_k := |\phi(W_k) - \phi(W_{k-1})|')
 %xlabel('k')
-        fprintf('%s%g, %s%i, %s%i\n','Forward Euler, step=',steps(k),'Projection=',projectv(k),'i=' ,i)
+        fprintf('%s%g, %s%i, %s%i\n','Forward Euler, step=',steps(k),...
+            'Projection=',projectv(k),'i=' ,i)
         y=W'*xx;
         figure;
         subplot(3,1,1);
